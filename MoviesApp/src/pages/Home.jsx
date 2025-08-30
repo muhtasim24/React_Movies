@@ -1,7 +1,9 @@
 import { useState } from "react"
 import MovieCard from "../components/MovieCard"
 
-
+// when state changes the entire component and anything in the component, the entire component is re-rendered
+// the state stays what it changed to but every code is ran again
+// something as a normal variable, that is not a state, it will reset if its not a state
 function Home() {
     // first argument is the state
     // 2nd arg, is the function to change the state
@@ -45,7 +47,7 @@ function Home() {
                 so need a unique identifier, like an id
                 **WHEN DYNAMICALLY ADDING, NEED KEY PROPERTY** */}
                 {movies.map((movie) => (
-                    movie.title.toLowerCase().startsWith(searchQuery) &&<MovieCard movie={movie} key={movie.id} />
+                   <MovieCard movie={movie} key={movie.id} />
                 ))}
             </div>
         </div>
