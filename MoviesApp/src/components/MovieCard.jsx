@@ -2,6 +2,9 @@
 // want to work for any possible movie
 // what do we need 
 // so going to assume that data is going to come in as an object
+
+import '../css/MovieCard.css'
+
 function MovieCard({movie}) {
 
     function onFavoriteClick() {

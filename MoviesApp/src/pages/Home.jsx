@@ -1,5 +1,6 @@
 import { useState } from "react"
 import MovieCard from "../components/MovieCard"
+import '../css/Home.css'
 
 // when state changes the entire component and anything in the component, the entire component is re-rendered
 // the state stays what it changed to but every code is ran again

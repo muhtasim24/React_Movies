@@ -1,3 +1,4 @@
+import '../css/Home.css'
 
 
 function Favorites() {
