@@ -1,10 +1,14 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import MovieCard from "../components/MovieCard"
 import '../css/Home.css'
+import { searchMovies, getPopularMovies } from "../services/api";
 
 // when state changes the entire component and anything in the component, the entire component is re-rendered
 // the state stays what it changed to but every code is ran again
 // something as a normal variable, that is not a state, it will reset if its not a state
+
+// useEffect allows you to add side effects to your functions or to your components and define when they should run
+// lets say we only want something to run on initial render
 function Home() {
     // first argument is the state
     // 2nd arg, is the function to change the state
@@ -13,11 +17,35 @@ function Home() {
 
     // array of movies,
     // want to render the movies dynamically
-    const movies = [
-        {id: 1, title: "John Wick", release_date: "2020"},
-        {id: 2, title: "Terminator", release_date: "1999"},
-        {id: 3, title: "The Matrix", release_date: "1998"}
-    ]
+    const [movies, setMovies] = useState([]);
+
+    // when youre loading something from an api
+    // set 2 pieces of state
+    // 1 for loading, 1 for storing any data
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    // how useEffect works
+    // put in a function you want to call when the dependency array changes (2nd arg)
+    // whatver is in the dependency array, we're going to check it after every single render, if its changed since last render, itll run useEffect
+    // if nothing in the array, empty array, only runs once on initial render
+    useEffect( () => {
+        const loadPopularMovies = async () => {
+            try {
+                const popularMovies = await getPopularMovies();
+                setMovies(popularMovies)
+            } catch (err) {
+                // if caught an error itll go here
+                console.log(err);
+                setError("Failed to load movies...")
+            } finally {
+                // finally , we got everything? so no longer loading
+                setLoading(false)
+            }
+        }
+
+        loadPopularMovies()
+    } , [])
 
     const handleSearch = (e) => {
         e.preventDefault()
