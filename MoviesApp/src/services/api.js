@@ -1,5 +1,5 @@
-const API_KEY = "3243c2977acb2536687a6b19f290f200";
-const BASE_URL = "https://api.themoviedb.org/3"
+const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 // async function means itll take a secnd to get the result
 // so we have to await to get the result
